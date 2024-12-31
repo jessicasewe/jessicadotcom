@@ -1,0 +1,53 @@
+---
+const today = new Date();
+---
+
+<footer>
+    <div class="contact-wrapper">
+		<p>Let's Connect and Collaborate!</p>
+        <a href="mailto:jessicasewe89@gmail.com" class="say-hi-button">
+            <span>Say Hi</span>
+        </a>
+    </div>
+</footer>
+
+<style>
+    footer {
+        padding: 1em 1em 1em;
+        background: linear-gradient(var(--gray-gradient)) no-repeat;
+        color: rgb(var(--gray));
+        text-align: center;
+        position: relative;
+    }
+
+    .contact-wrapper {
+        margin: 1em auto;
+    }
+
+    .say-hi-button {
+        display: inline-block;
+        text-decoration: none;
+        padding: 0.5em 1em;
+        border: 2px solid black;
+        color: black;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .say-hi-button:hover {
+        background-color: black;
+        color: white;
+    }
+
+    .say-hi-button span {
+        display: inline-block;
+    }
+
+    p {
+        margin-top: 1em;
+    }
+</style>
+
+
