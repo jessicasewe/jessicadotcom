@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Projects from "../components/Projects.astro";
 ---
 
 <!doctype html>
@@ -97,10 +98,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		</section>
 		<section id="github-projects" class="projects-container">
         <h2>Projects</h2>
-        <div id="projects-list">Loading projects...</div>
-        <noscript>
-          <p>JavaScript is disabled. Please enable it to view the projects.</p>
-        </noscript>
+		<Projects />
       </section>
 
     </main>
@@ -127,8 +125,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	}
 
 	.social-link:hover {
-	color: #0366d6; /* Change text color on hover */
-	transform: scale(1.1); /* Slightly scale up the button */
+	color: #0366d6;
+	transform: scale(1.1);
 	}
 
     .link-wrapper {
@@ -143,8 +141,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 	.social-link:hover .line-top,
 	.social-link:hover .line-bottom {
-		background-color: #0366d6; /* Change color of lines */
-		transform: translateX(-50%) scaleX(1.5); /* Stretch the lines */
+		background-color: #0366d6; 
+		transform: translateX(-50%) scaleX(1.5);
 	}
 
     @keyframes snake-move {
@@ -252,7 +250,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	}
 
 	.experience-item:hover .experience-details .description {
-		max-height: 200px; /* Adjust this based on the description's expected height */
+		max-height: 200px;
 		opacity: 1;
 	}
 
@@ -261,22 +259,25 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	}
 
 	#experience {
-		margin-top: 30px; /* Adds space between the title and the social links above it */
+		margin-top: 30px;
+	}
+
+	#github-projects {
+		margin-top: 100px;
 	}
 
 	.projects-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
 
-#projects-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 800px; /* Reduce overall width */
-}
+	#projects-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 100px;
+	max-width: 800px;
+	}
 
   .project-card {
   padding: 1rem;
@@ -346,38 +347,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			description.style.display = 'none';
 		}
 	}
-
-	document.addEventListener("DOMContentLoaded", async () => {
-    const reposEndpoint = "https://api.github.com/users/jessicasewe/repos?sort=updated&per_page=4";
-    const projectsList = document.getElementById("projects-list");
-
-    try {
-      const response = await fetch(reposEndpoint);
-      const repos = await response.json();
-
-      // Clear loading text
-      projectsList.innerHTML = "";
-
-      repos.forEach(repo => {
-        const projectCard = document.createElement("div");
-        projectCard.classList.add("project-card");
-
-        projectCard.innerHTML = `
-          <div class="og-card">
-            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
-              <img src="https://opengraph.githubassets.com/1/${repo.full_name}" alt="${repo.name} preview" />
-              <div class="og-content">
-                <p>${repo.description || ""}</p>
-              </div>
-            </a>
-          </div>
-        `;
-        projectsList.appendChild(projectCard);
-      });
-    } catch (error) {
-      projectsList.innerHTML = "<p>Error loading projects. Please try again later.</p>";
-    }
-  });
 
   </script>
 </html>
