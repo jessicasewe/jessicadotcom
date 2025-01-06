@@ -9,8 +9,8 @@ import { SITE_TITLE } from '../consts';
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="#experience">Experience</HeaderLink>
-			<HeaderLink href="#projects">Projects</HeaderLink>
-			<HeaderLink href="/about">Contact</HeaderLink>
+			<HeaderLink href="#github-projects">Projects</HeaderLink>
+			<a href="Jessica_Sewe_Guriyire_Resume.pdf" target="_blank" class="resume-button">Resume</a>
 		</div>
 	</nav>
 </header>
@@ -45,9 +45,26 @@ import { SITE_TITLE } from '../consts';
 		text-decoration: none;
 		font-size: 0.9em;
 	}
-	nav a.active {
+	nav a.active, .resume-button.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
+	}
+
+	/* Resume Button Styling */
+	.resume-button {
+		padding: 0.5em 1em;
+		border-radius: 30px;
+		background: transparent;
+		color: var(--black);
+		font-weight: bold;
+		cursor: pointer;
+		text-decoration: none;
+		transition: all 0.1s ease;
+	}
+
+	.resume-button:hover {
+		background: var(--accent);
+		color: white;
 	}
 	@media (max-width: 720px) {
 		.social-links {
@@ -58,3 +75,31 @@ import { SITE_TITLE } from '../consts';
     	}
 	}
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll("nav a");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach((link) => {
+                            link.classList.remove("active");
+                            if (link.getAttribute("href") === `#${entry.target.id}`) {
+                                link.classList.add("active");
+                            }
+                        });
+                    }
+                });
+            },
+            { threshold: 0.5 } // Adjust the threshold for when it considers the section "active"
+        );
+
+        sections.forEach((section) => {
+            observer.observe(section);
+        });
+    });
+</script>
+
