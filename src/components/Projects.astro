@@ -1,0 +1,140 @@
+---
+const projects = [
+  {
+    title: 'FileBlend',
+    link: 'https://github.com/jessicasewe/Fileblend',
+    imageUrl: 'fileblend.png',
+    description: 'File Conversion Tool',
+  },
+  {
+    title: 'AMAT-HCL',
+    link: 'https://github.com/jessicasewe/AMaT-HCL',
+    imageUrl: 'amat.png',
+    description: 'Online Medical Consultation Platform',
+  },
+  {
+    title: 'ToskA',
+    link: 'https://github.com/jessicasewe/ToskA',
+    imageUrl: 'toska.png',
+    description: 'Music App powered by Sportify API',
+  },
+  {
+    title: 'ShellDine',
+    link: 'https://github.com/jessicasewe/ShellDine',
+    imageUrl: 'shelldine.png',
+    description: 'Terminal Style interface for ordering food',
+  }
+];
+
+// Duplicate projects for infinite scrolling
+const duplicatedProjects = [...projects, ...projects];
+---
+
+<div class="projects-wrapper">
+  <div class="projects-container">
+    {duplicatedProjects.map((project, index) => (
+      <a href={project.link} class="card" target="_blank" rel="noopener noreferrer" key={index}>
+        <img src={project.imageUrl} alt={project.title} class="card__img">
+        <span class="card__footer">
+          <span>{project.title}</span>
+          <span class="text-base">{project.description}</span>
+        </span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .projects-wrapper {
+    width: 91vw;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .projects-container {
+    display: flex;
+    gap: 40px;
+    width: max-content;
+    animation: scroll 15s linear infinite;
+  }
+
+  .card {
+    --blur: 16px;
+    --size: clamp(200px, 40vmin, 400px);
+    width: var(--size);
+    aspect-ratio: 4 / 3;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    color: #ffffff;
+    transform: translateZ(0);
+    flex-shrink: 0;
+  }
+
+  .card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s;
+  }
+
+  .card__footer {
+    padding: 0 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: hsla(0, 0%, 0%, 0.995);
+    backdrop-filter: blur(var(--blur));
+    height: 30%;
+    display: grid;
+    grid-template-rows: auto auto;
+    align-content: center;
+  }
+
+  .card__action {
+    position: absolute;
+    aspect-ratio: 1;
+    width: calc(var(--size) * 0.15);
+    bottom: 30%;
+    right: 1.5rem;
+    background: hsl(0 0% 100% / 0.5);
+    display: grid;
+    place-items: center;
+    border-radius: 0.5rem;
+  }
+
+  .card__action svg {
+    aspect-ratio: 1;
+    width: 50%;
+    transform: rotate(90deg);
+  }
+
+  .card__footer span:nth-of-type(1) {
+    font-size: calc(var(--size) * 0.065);
+  }
+
+    .card__footer span:nth-of-type(2) {
+        font-size: calc(var(--size) * 0.05);
+        color:rgb(173, 179, 179);
+        max-height: 1.2em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+  .card:is(:hover, :focus-visible) {
+    --hover: 1;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>
